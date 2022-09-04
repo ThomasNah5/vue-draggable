@@ -1,5 +1,10 @@
 <template>
-  <div class="drop-zone">
+  <div
+    class="drop-zone"
+    @drop="onDrop($event, 1)"
+    @dragenter.prevent
+    @dragover.prevent
+  >
     <div
       v-for="item in getList(1)"
       :key="item.id"
@@ -10,7 +15,12 @@
       {{ item.title }}
     </div>
   </div>
-  <div class="drop-zone">
+  <div
+    class="drop-zone"
+    @drop="onDrop($event, 2)"
+    @dragenter.prevent
+    @dragover.prevent
+  >
     <div
       v-for="item in getList(2)"
       :key="item.id"
@@ -46,12 +56,12 @@ export default {
     };
 
     const onDrop = (event, list) => {
-      const itemID = event.dataTransfer.getData('itemID')
-      const item = items.value.find((item) => item.id == itemID )
-      item.list = list
-    }
+      const itemID = event.dataTransfer.getData('itemID');
+      const item = items.value.find((item) => item.id == itemID);
+      item.list = list;
+    };
 
-    return { getList, startDrag, onDrop, };
+    return { getList, startDrag, onDrop };
   },
 };
 </script>
